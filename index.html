@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StarDSR — Real-Time Chinese Dysarthric Speech Reconstruction</title>
+<meta name="description" content="StarDSR: a lightweight Mamba-based framework for real-time end-to-end Mandarin dysarthric speech reconstruction on edge devices.">
+<style>
+  :root {
+    --ink: #1f2328;
+    --ink-2: #4b5563;
+    --ink-3: #8a919c;
+    --accent: #185fa5;
+    --accent-soft: #e6f1fb;
+    --line: #e5e7eb;
+    --card: #f8f9fb;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: var(--ink);
+    background: #fff;
+    line-height: 1.75;
+    font-size: 16px;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(255,255,255,.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; gap: 20px; align-items: center; height: 52px; }
+  nav .brand { font-weight: 700; color: var(--accent); }
+  nav a { color: var(--ink-2); text-decoration: none; font-size: 14px; }
+  nav a:hover { color: var(--accent); }
+
+  header.hero { padding: 64px 0 40px; border-bottom: 1px solid var(--line); }
+  .kicker { color: var(--accent); font-weight: 600; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; margin: 0 0 12px; }
+  h1 { font-size: 40px; line-height: 1.2; margin: 0 0 10px; letter-spacing: -0.02em; }
+  .subtitle { font-size: 18px; color: var(--ink-2); margin: 0 0 6px; max-width: 720px; }
+  .authors { color: var(--ink-3); font-size: 14.5px; margin: 10px 0 0; }
+  .badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+  .badge {
+    background: var(--accent-soft); color: var(--accent);
+    border-radius: 999px; padding: 6px 14px; font-size: 13.5px; font-weight: 600;
+  }
+
+  section { padding: 40px 0 8px; }
+  h2 { font-size: 24px; margin: 0 0 16px; letter-spacing: -0.01em; }
+  p { margin: 0 0 14px; }
+
+  figure { margin: 24px 0; text-align: center; }
+  figure img {
+    max-width: 100%; height: auto; background: #fff;
+    border: 1px solid var(--line); border-radius: 10px; padding: 12px;
+  }
+  figure.wide img { width: 100%; }
+  figcaption { color: var(--ink-2); font-size: 14px; margin-top: 10px; }
+  .fig-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 680px) { .fig-row { grid-template-columns: 1fr; } }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 760px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  .tbl { overflow-x: auto; margin: 20px 0 8px; }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; }
+  caption { caption-side: top; text-align: left; color: var(--ink-2); font-size: 14px; padding-bottom: 10px; }
+  th, td { padding: 8px 12px; text-align: center; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; }
+  thead th { border-top: 2px solid var(--ink); border-bottom: 1.5px solid var(--ink); font-weight: 600; }
+  tbody tr:last-child td { border-bottom: 2px solid var(--ink); }
+  tbody tr.hl td { background: var(--accent-soft); font-weight: 600; }
+
+  .takeaway {
+    background: var(--card); border-left: 4px solid var(--accent);
+    padding: 16px 22px; border-radius: 0 10px 10px 0; margin-top: 24px;
+  }
+
+  footer {
+    margin-top: 56px; border-top: 1px solid var(--line);
+    padding: 28px 0 48px; color: var(--ink-3); font-size: 13.5px;
+  }
+  @media (max-width: 680px) {
+    h1 { font-size: 30px; }
+    .subtitle { font-size: 16px; }
+    body { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="brand">StarDSR</span>
+    <a href="#overview">Overview</a>
+    <a href="#results">Results</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">Dysarthric Speech Reconstruction · Mamba · Edge Devices</p>
+    <h1>StarDSR</h1>
+    <p class="subtitle">A lightweight Mamba-based framework for real-time, end-to-end Chinese dysarthric speech reconstruction — clear speech that still sounds like the patient, even on edge devices.</p>
+    <!-- TODO: 发布前替换为真实作者/单位（原 PDF 为匿名模板） -->
+    <p class="authors">Author Name · Affiliation</p>
+    <div class="badges">
+      <span class="badge">CER 23.2% → 18.1%（−22% relative）</span>
+      <span class="badge">RTF 0.21 @ RTX 4090D</span>
+      <span class="badge">RTF 0.92 @ OrangePi edge</span>
+      <span class="badge">Best naturalness MOS</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section id="overview">
+  <h2>Overview</h2>
+  <p>StarDSR transforms impaired dysarthric speech into clear, natural audio while preserving the speaker's own timbre — <strong>no healthy reference speech is needed at inference</strong>. The framework repurposes StarGANv2-VC into an identity-preserving restoration pipeline: a Mamba-based Rapid Spectrogram Refinement (RSR) block restores phonetic clarity with linear-time sequence modeling, a timbre encoder with vector quantization re-injects stable speaker identity, and a voiced-masked, log-domain F<sub>0</sub> conditioning scheme corrects pitch instability through AdaIN-based decoding.</p>
+  <figure class="wide">
+    <img src="images/framework.png" alt="Overall framework of StarDSR">
+    <figcaption>Overall framework of StarDSR.</figcaption>
+  </figure>
+  <div class="fig-row">
+    <figure>
+      <img src="images/timbre-encoder.png" alt="Timbre encoder">
+      <figcaption>Timbre encoder: ECAPA-TDNN + Mamba with a VQ bottleneck.</figcaption>
+    </figure>
+    <figure>
+      <img src="images/rsr-block.png" alt="RSR block">
+      <figcaption>RSR block: stacked Mamba blocks with a length regulator.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="results">
+  <h2>Results</h2>
+
+  <div class="tbl">
+    <table>
+      <caption>Intelligibility — character error rate (CER, lower is better) on three representative speakers (mild / moderate / severe) and all dysarthric speakers.</caption>
+      <thead>
+        <tr><th>Model</th><th>01 (mild)</th><th>04 (moderate)</th><th>06 (severe)</th><th>All</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Original speech</td><td>10.4%</td><td>29.3%</td><td>37.9%</td><td>23.2%</td></tr>
+        <tr><td>Conformer (CDSD)</td><td>11.6%</td><td>27.0%</td><td>37.1%</td><td>30.2%</td></tr>
+        <tr><td>StarDSR (w/o RSR)</td><td>12.7%</td><td>31.7%</td><td>39.5%</td><td>26.1%</td></tr>
+        <tr class="hl"><td>StarDSR</td><td>9.8%</td><td>25.9%</td><td>27.8%</td><td>18.1%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tbl">
+    <table>
+      <caption>Inference efficiency — real-time factor (RTF, lower is better; &lt;1 means real time) on a server GPU and an OrangePi AIpro (8T) edge board.</caption>
+      <thead>
+        <tr><th>Model</th><th>Complexity</th><th>RTX 4090D</th><th>OrangePi</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Transformer</td><td>O(L<sup>2</sup>)</td><td>0.35</td><td>1.24</td></tr>
+        <tr><td>Conformer</td><td>O(L<sup>2</sup>)</td><td>0.38</td><td>1.45</td></tr>
+        <tr><td>Paraformer</td><td>O(L)</td><td>0.25</td><td>0.98</td></tr>
+        <tr class="hl"><td>StarDSR</td><td>O(L)</td><td>0.21</td><td>0.92</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid-2">
+    <div class="tbl">
+      <table>
+        <caption>Naturalness MOS (±95% CI, higher is better).</caption>
+        <thead>
+          <tr><th>Model</th><th>01</th><th>04</th><th>06</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Original speech</td><td>3.49±0.11</td><td>2.78±0.12</td><td>3.11±0.14</td></tr>
+          <tr><td>StarDSR (w/o RSR)</td><td>3.34±0.23</td><td>3.05±0.18</td><td>2.97±0.11</td></tr>
+          <tr><td>StarDSR (w/o F<sub>0</sub>)</td><td>3.82±0.15</td><td>3.51±0.19</td><td>3.64±0.12</td></tr>
+          <tr class="hl"><td>StarDSR</td><td>4.19±0.17</td><td>3.89±0.21</td><td>3.91±0.15</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tbl">
+      <table>
+        <caption>Speaker-similarity MOS (±95% CI, higher is better).</caption>
+        <thead>
+          <tr><th>Model</th><th>01</th><th>04</th><th>06</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>StarDSR (w/o F<sub>0</sub>+SE)</td><td>2.37±0.11</td><td>2.46±0.10</td><td>2.77±0.16</td></tr>
+          <tr><td>StarDSR (w/o F<sub>0</sub>)</td><td>2.69±0.13</td><td>2.55±0.17</td><td>2.91±0.22</td></tr>
+          <tr><td>StarDSR (w/o SE)</td><td>2.82±0.09</td><td>2.47±0.12</td><td>2.89±0.17</td></tr>
+          <tr class="hl"><td>StarDSR (full)</td><td>3.19±0.12</td><td>3.02±0.12</td><td>3.26±0.12</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <p class="takeaway">Across all dysarthric speakers, StarDSR reduces CER from 23.2% to 18.1%, runs in real time on both a server GPU (RTF 0.21) and an edge board (RTF 0.92), and achieves the highest naturalness MOS among compared systems — while ablations confirm that the RSR block drives naturalness and that both the speaker encoder and F<sub>0</sub> conditioning preserve speaker identity.</p>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>StarDSR demo page · Hosted on GitHub Pages</p>
+  </div>
+</footer>
+
+</body>
+</html>
